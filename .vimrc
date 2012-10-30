@@ -40,4 +40,4 @@ set whichwrap=b,s,h,l,<,>,[,]
 set nowrapscan
 
 "カラースキーマを設定
-colorscheme zenburn
+colorscheme molokai
