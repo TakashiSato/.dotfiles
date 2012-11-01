@@ -202,7 +202,7 @@ export LANG=ja_JP.UTF-8
 #
 # DISPLAY
 #
-export DISPLAY=localhost:10.0
+#export DISPLAY=localhost:10.0
 
 ## Default shell configuration
 #
@@ -262,8 +262,8 @@ zstyle ':completion:*' list-colors 'di=;34;1' 'ln=;35;1' 'so=;32;1' 'ex=31;1' 'b
 
 # Auto predict
 #
-autoload predict-on
-predict-on
+#autoload predict-on
+#predict-on
 
 # Load .zshrc.mine
 #
