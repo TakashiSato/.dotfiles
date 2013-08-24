@@ -1,0 +1,32 @@
+Host univ
+	User		5213b0349
+	HostName	muse01.mse.waseda.ac.jp
+	ForwardX11	yes
+	RSAAuthentication	no
+	PubkeyAuthentication	no
+
+Host twsimu
+	User		takashi
+	HostName	192.168.11.70
+	IdentityFile	~/.ssh/twsimukey
+	ForwardX11	yes
+	
+Host cluster
+	User		sato
+	HostName	133.9.192.109
+	IdentityFile	~/.ssh/clusterkey
+	ForwardX11	yes
+
+Host mygithub
+	User		git
+	Port		22
+	HostName	github.com
+	IdentityFile	~/.ssh/githubkey
+	TCPKeepAlive	yes
+	IdentitiesOnly 	yes
+
+Host wmmc
+	User		wmmc
+	HostName	wmmc.jp
+	IdentityFile	~/.ssh/wmmckey
+	ForwardX11	yes
