@@ -1,11 +1,12 @@
 ########################################
 # 環境変数
-PATH=/opt/local/bin:/opt/local/sbin:$PATH
+PATH=/opt/local/bin:/opt/local/sbin:$HOME/bin:/Applications/MacVim.app/Contents/MacOS:$PATH
 MANPATH=/opt/local/man:$MANPATH
 export EDITOR=/Application/MacVim.app/Contents/MacOS/Vim
 alias vi='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
 alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
 export LANG=ja_JP.UTF-8
+export GIT_EDITOR=vim
  
  
 # 色を使用出来るようにする
@@ -218,3 +219,5 @@ linux*)
 esac
  
 # vim:set ft=zsh:
+
+

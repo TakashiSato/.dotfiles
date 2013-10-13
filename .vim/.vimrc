@@ -59,15 +59,21 @@ set wildmenu
 " テキスト挿入中の自動折り返しを日本語に対応させる
 set formatoptions+=mM
 " クリップボード共有
-set clipboard+=unnamedplus,unnamed
+set clipboard+=unnamedplus,unnamed,autoselect
 " 変更中のファイルでも、保存しないで他のファイルを表示する
 set hidden
+ "行頭行末の左右移動で行をまたぐ
+set whichwrap=b,s,h,l,<,>,[,]
+ " 左右スクロールは一文字づつ行う
+set sidescroll=1
 
 "---------------------------------------------------------------------------
 " GUI固有ではない画面表示の設定:
 "---------------------------------------------------------------------------
+" カラースキーム
+colorscheme desert
 " 行番号を非表示 (number:表示)
-set nonumber
+set number
 " ルーラーを表示 (noruler:非表示)
 set ruler
 " タブや改行を表示 (list:表示)
@@ -84,22 +90,33 @@ set cmdheight=2
 set showcmd
 " タイトルを表示
 set title
-" カラースキーム
-colorscheme desert
+ "上下8行の視界を確保
+set scrolloff=8
+ " 左右スクロール時の視界を確保
+set sidescrolloff=16
+
+"---------------------------------------------------------------------------
+" Status Line
+"---------------------------------------------------------------------------
+set laststatus=2				" ステータスラインを2行に
+set statusline=%<%f\ #%n%m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%y%=%l,%c%V%8P
 
 "---------------------------------------------------------------------------
 " キーマップ
 "---------------------------------------------------------------------------
 " Space . で.vimrc再読み込み
 nmap <Space>. :source ~/.vimrc<CR>
+" Space > で.gvimrc再読み込み
+nmap <Space>> :source ~/.gvimrc<CR>
 " Space , で.vimrcを開く
 nmap <Space>, :e ~/.vimrc<CR>
+" Space < で.gvimrcを開く
+nmap <Space>< :e ~/.gvimrc<CR>
 " 折り返されている行の見かけの前・次の行にj・kで移動
 nmap k gk
 nmap j gj
 " Space k でバッファを閉じる
-nmap <Space>k :close<CR>
-
+nmap <Space>k :bdelete<CR>
 
 "---------------------------------------------------------------------------
 " NeoBundle
@@ -115,10 +132,12 @@ NeoBundle 'Sgit@github.com/hougo/neobundle.vim'
 NeoBundle 'Shougo/vimproc'
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/unite.vim'
+NeoBundle 'h1mesuke/unite-outline'
 NeoBundle 'Shougo/vimfiler.vim'
 NeoBundle 'vim-scripts/YankRing.vim'
 NeoBundle 'mbbill/undotree'
 NeoBundle 'thinca/vim-quickrun'
+NeoBundle 'git://git.code.sf.net/p/vim-latex/vim-latex'
 "NeoBundle 'VimClojure'
 "NeoBundle 'Shougo/vimshell'
 "NeoBundle 'Shougo/neosnippet'
@@ -133,6 +152,7 @@ filetype indent on
 "---------------------------------------------------------------------------
 " , y でヤンク履歴
 nmap ,y :YRShow<CR>
+let g:yankring_history_dir = '~/Temp/'
 
 "---------------------------------------------------------------------------
 " undotree.vim
@@ -176,8 +196,27 @@ au FileType unite inoremap <silent> <buffer> <expr> <C-l> unite#do_action('vspli
 " undotree.vim
 au FileType unite nnoremap <silent> <buffer> <ESC><ESC> q
 au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>q
+" アウトライン表示
+nnoremap <silent> ,o :<C-u>Unite outline<CR>
+
 
 "---------------------------------------------------------------------------
 " VimFiler.vim
 "---------------------------------------------------------------------------
 nmap <Leader>f :VimFiler -split -simple -winwidth=35 -no-quit<CR>
+
+"---------------------------------------------------------------------------
+" vim-latex
+"---------------------------------------------------------------------------
+" スペルチェック（拡張子がTeXのときON）
+"autocmd FileType tex set spell
+
+let tex_flavor = 'latex'
+set grepprg=grep\ -nH\ $*
+set shellslash
+let g:Tex_DefaultTargetFormat = 'pdf' "Macの人はデフォルトでpdfなので必要ない その他のOSの人はデフォルトがdviなので必要
+let g:Tex_CompileRule_dvi = 'platex --interaction=nonstopmode $*'
+let g:Tex_CompileRule_pdf = 'dvipdfmx $*.dvi'
+let g:Tex_FormatDependency_pdf = 'dvi,pdf'
+let g:Tex_ViewRule_pdf = 'open -a /Applications/Preview.app'
+

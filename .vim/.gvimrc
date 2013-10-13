@@ -9,12 +9,12 @@ colorscheme desert
 " ウインドウの幅
 set columns=100
 " ウインドウの高さ
-set lines=48
+set lines=60
 " コマンドラインの高さ(GUI使用時)
 set cmdheight=2
 
 set showtabline=2
-set transparency=5
+set transparency=10
 set imdisable
 set guioptions-=T
 set antialias
@@ -23,6 +23,8 @@ set number
 set nobackup
 set visualbell t_vb=
 set nowrapscan
+set clipboard+=autoselect
+set guioptions+=a
 
 "---------------------------------------------------------------------------
 " マウスに関する設定:
@@ -39,3 +41,4 @@ set mouse=a
 set nomousefocus
 " 入力時にマウスポインタを隠す (nomousehide:隠さない)
 set mousehide
+
